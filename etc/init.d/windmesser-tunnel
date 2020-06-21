@@ -1,0 +1,35 @@
+#!/bin/sh
+# Start/stop windmesser-tunnel
+#
+### BEGIN INIT INFO
+# Provides:          windmesser-tunnel
+# Required-Start:    $network $remote_fs $syslog $time
+# Required-Stop:     $network $remote_fs $syslog $time
+# Should-Start:      $network $named slapd autofs ypbind nscd nslcd winbind sssd
+# Should-Stop:       $network $named slapd autofs ypbind nscd nslcd winbind sssd
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: The tunnel for remote support, based on windmesser-tunnel user
+# Description:
+
+### END INIT INFO
+# The following part always gets executed.
+#echo "This part always gets executed"
+
+# The following part carries out specific functions depending on arguments.
+case "$1" in
+  start)
+    echo "Starting windmesser-tunnel"
+    /usr/bin/sudo -u windmesser-tunnel /home/windmesser-tunnel/startTunnel.sh
+    echo "windmesser-tunnel started"
+    ;;
+  stop)
+    echo "Stopping not implemented"
+    ;;
+  *)
+    echo "Usage: /etc/init.d/windmesser-tunnel start"
+    exit 1
+    ;;
+esac
+
+exit 0

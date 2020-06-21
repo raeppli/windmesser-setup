@@ -1,0 +1,5 @@
+echo "==============================================================================="
+echo "REMEMBER: Windmesser is not restarted automatically as long as pi is logged in!"
+echo "==============================================================================="
+echo "To attach to the windmesser session, type 'screen -r'; to detach type Ctrl-a d"
+echo "To find exist. sessions, type 'screen -ls'. Attach to one using 'screen -r <id>"
