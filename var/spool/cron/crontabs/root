@@ -28,5 +28,5 @@
 0,10,20,30,40,50 * * * * /usr/bin/php /home/pi/Winduster/transferWindalarmFromRemote.php 2>1 >> /home/pi/Winduster/transfer.log
 4 0 * * *  /usr/bin/php /home/pi/Winduster/sendWindStat.php 2>&1 >> /home/pi/Winduster/transfer.log
 02 * * * * /usr/sbin/ntpdate-debian ch.pool.ntp.org
-*/5 * * * * /home/pi/optionallyRestartWindmesser.sh 2>&1 >> /home/pi/Winduster/restartLog.log
+*/5 * * * * /home/pi/scripts/optionallyRestartWindmesser.sh 2>&1 >> /home/pi/Winduster/restartLog.log
 50 7 * * * /sbin/shutdown -r -t 40 now
