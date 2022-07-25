@@ -14,14 +14,14 @@ if($res)
         $fields=explode(",",$prefs[$i]);
         $fields[1] = "'" . $fields[1] . "'"; // state field is alphanumeric
         $prefs[$i] = implode(",",$fields);
-	$query = "INSERT INTO windalert VALUES (" . $prefs[$i] .",null,null)";
-        
-        if($ins = $mysql_query($query)) {
+        $query = "INSERT INTO windalert VALUES (" . $prefs[$i] .",null,null)";
+
+        if($ins = $mysqli->query($query)) {
             echo "Inserted " . $prefs[$i] . "\n";
-	}
-	else {
+        }
+        else {
             $fields=explode(",",$prefs[$i]);
-	    $query = "UPDATE windalert
+            $query = "UPDATE windalert
             SET state = " . $fields[1] . ",
                 minTop=" . $fields[2] . ",
                 minAvg=" . $fields[3] . ",
@@ -32,10 +32,10 @@ if($res)
                 address=null
             WHERE id=" . $fields[0];
             if($res=$mysqli->query($query))
-	    {
-		echo "Updated " . $fields[0] . "\n";
-	    }
-	    else die($mysqli->error);
+            {
+                echo "Updated " . $fields[0] . "\n";
+            }
+            else die($mysqli->error);
         }
         echo "String " . $i . ": " . $prefs[$i++] . "\n";
     }
