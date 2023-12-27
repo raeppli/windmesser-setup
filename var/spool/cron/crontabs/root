@@ -21,7 +21,7 @@
 #
 # m h  dom mon dow   command
 # m h  dom mon dow   command
-@reboot /usr/bin/nmap 192.168.1.0/24 > /home/raeppli/nmap.log
+08 * * * *  /usr/bin/nmap -sn 192.168.1.0/24 | tr '\n' ' ' | sed 's/Nmap scan report/\n/g' > /home/raeppli/nmap-hosts
 8,18,28,38,48,58 * * * * /usr/bin/php /home/pi/scripts/transferUsersFromRemote.php  2>&1 >> /home/pi/Winduster/transfer.log
 */10 * * * * /usr/bin/php /home/pi/scripts/transferWindalarmFromRemote.php 2>1 >> /home/pi/Winduster/transfer.log
 */10 * * * * /home/windmesser-tunnel/optionallyRestartTunnel.sh
