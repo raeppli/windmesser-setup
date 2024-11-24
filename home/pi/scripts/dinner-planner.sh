@@ -1,6 +1,4 @@
 #!/bin/bash
-#crontab: 10 05 * * * bash -c /var/www/html/winduster/dinner-planner.sh
-#requires ssmtp installed, and ssmtp.conf set up
 LANG=de_DE.UTF-8
 PATH=/usr/local/bin:/usr/bin:/bin
 
@@ -20,7 +18,8 @@ export LANG=de_DE.UTF-8
 currentDay=$(date +%A)
 
 # Erstelle eine Nachricht
-message="Eintraege fuer heute, $currentDay:\n\n"
+message=""
+#Eintraege fuer heute, $currentDay:\n\n"
 
 # Benutzernamen der Familienmitglieder
 family_members=("Mami" "Papi" "Yasmin" "Isabelle")
@@ -39,15 +38,17 @@ for member in "${family_members[@]}"; do
     fi
 
     # Füge die Informationen zum Nachrichtentext hinzu
-    message+="$member: $entry_text\n"
+    message+="$member: $entry_text;\n"
 done
 
 # E-Mail-Empfänger (hier Beispiel-E-Mail-Adresse anpassen)
-emailRecipient="roger.aeppli@aeppli.org,mauricelia@aeppli.org,yasmin@aeppli.org,isabelle@aeppli.org"
+#emailRecipient="roger.aeppli@aeppli.org,mauricelia@aeppli.org,yasmin@aeppli.org,isabelle@aeppli.org"
+emailRecipient="roger.aeppli@aeppli.org"
 emailSubject="Familien Abendessen Plan fuer $currentDay"
 
 heute=$(date +%A," "%d.%m.%4Y)
 # Sende die E-Mail mit der Nachricht
-echo -e "Subject: Anwesenheiten Nachtessen $heute\n\n$message" | /usr/sbin/ssmtp "$emailRecipient"
+echo -e "Subject: Anwesenheiten Nachtessen $currentDay\n\n$heute\n$message" | /usr/sbin/ssmtp "$emailRecipient"
+echo -e "Heute ($heute) an/abwesend:\n$message" > /windusterdata/Nachtessen_heute.txt
 
 echo "Die E-Mail wurde erfolgreich gesendet."
